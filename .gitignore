@@ -1,0 +1,12 @@
+gin-bin
+test.*
+*.crt
+*.key
+*.p8
+*.so
+run-nodemon.sh
+config.yml
+docker-compile
+.idea
+*.pem
+bin

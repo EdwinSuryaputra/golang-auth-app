@@ -1,0 +1,5 @@
+DROP INDEX unique_resources_name_deleted;
+
+DROP INDEX unique_resources_name_menu_submenu_function_deleted;
+
+DROP TABLE resources;

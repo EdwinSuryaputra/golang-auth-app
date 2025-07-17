@@ -1,0 +1,65 @@
+application:
+  name: "iam-api"
+  port: 10530
+  env: LOCAL
+  tls: 
+    is_enabled: false
+    cert_file:
+    key_file: 
+  cors:
+    origins: "*"
+    methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+    headers: "Origin, Content-Type, Accept, Authorization, Application"
+    allow_credentials: false
+datasource:
+  postgres:
+    host: "localhost"
+    port: 5432
+    database: iam-api
+    username: myuser
+    password: 123456
+    sslmode: disable
+    retry: 3
+    retry_interval: 10s
+    pool_max_conns: 10
+  redis:
+    host: localhost
+    # host: redis-dev
+    port: 6379
+    pass:
+route:
+internal_service:
+  medio:
+    host: http://localhost:10630
+    routes:
+      get_list: /api/v1/sql/ppoc/data/list
+      get_activity_log: /api/v1/activity_log/ppoc
+external_service:
+  smtp:
+    host: mail.delinnce.com
+    port: "587"
+    user: "gananta@delinnce.com"
+    password: "Melon12!1"
+module:
+  auth:
+    jwt:
+      secret_key: it_suppose_to_be_a_random_key
+      token_expiry_in_seconds: 604800
+      is_forever_login_persist_forever: false
+      forever_login_duration_in_seconds: 31622400
+    web_page_url:
+      login_url: "https://dev.delinnce.com"
+      reset_password_url: "https://dev.delinnce.com/reset-password"
+  user:
+    payload_validation:
+      username_min_digit: 3
+      password_min_digit: 8
+      full_name_min_digit: 3
+      email_min_digit: 10
+      description_min_digit: 5
+  role:
+    payload_validation:
+      name_min_digit: 3
+      description_min_digit: 5
+      label_min_digit: 3
+monitoring:

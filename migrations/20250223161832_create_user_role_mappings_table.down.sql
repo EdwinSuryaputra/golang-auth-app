@@ -1,0 +1,3 @@
+DROP INDEX unique_user_role_mappings_user_id_role_id_deleted;
+
+DROP TABLE user_role_mappings;

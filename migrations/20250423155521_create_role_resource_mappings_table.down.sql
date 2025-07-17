@@ -1,0 +1,3 @@
+DROP INDEX unique_role_resource_mappings_deleted;
+
+DROP TABLE role_resource_mappings;
