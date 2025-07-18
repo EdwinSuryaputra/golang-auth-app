@@ -8,17 +8,13 @@ import (
 	"time"
 
 	statusenum "golang-auth-app/app/common/enums/status"
-	userenum "golang-auth-app/app/common/enums/user"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/adapters/sql/gorm/model"
+	"golang-auth-app/app/common/errorcode"
 
 	roleInterface "golang-auth-app/app/interfaces/management/role"
 	userInterface "golang-auth-app/app/interfaces/management/user"
 	userDto "golang-auth-app/app/interfaces/management/user/dto"
-
-	buInterface "golang-auth-app/app/interfaces/business_unit"
-	supplierInterface "golang-auth-app/app/interfaces/supplier"
 
 	"golang-auth-app/app/routes/rest/middleware/authorization"
 
@@ -30,19 +26,12 @@ import (
 )
 
 type updateUserAPIPayload struct {
-	IsInactive      bool                     `json:"isInactive"`
-	IsSubmit        bool                     `json:"isSubmit"`
-	Username        string                   `json:"username"`
-	FullName        string                   `json:"fullName"`
-	Email           string                   `json:"email"`
-	AssignedRoleIds []string                 `json:"assignedRoleIds"`
-	Details         *updateUserDetailPayload `json:"details"`
-}
-
-type updateUserDetailPayload struct {
-	BusinessUnitLevel *string `json:"businessUnitLevel"`
-	BusinessUnitId    *string `json:"businessUnitId"`
-	SupplierId        *string `json:"supplierId"`
+	IsInactive      bool     `json:"isInactive"`
+	IsSubmit        bool     `json:"isSubmit"`
+	Username        string   `json:"username"`
+	FullName        string   `json:"fullName"`
+	Email           string   `json:"email"`
+	AssignedRoleIds []string `json:"assignedRoleIds"`
 }
 
 // @Summary update a user
@@ -58,12 +47,10 @@ func update(
 	authMiddleware authorization.AuthorizationMiddleware,
 	roleSqlAdapter roleInterface.AdapterSQL,
 	userSqlAdapter userInterface.AdapterSQL,
-	buHttpAdapter buInterface.AdapterHttp,
-	supplierHttpAdapter supplierInterface.AdapterHttp,
 	userService userInterface.Service,
 ) {
 	routePath := fmt.Sprintf("%s/:id", prefix)
-	requiredResources := []string{"NTE_USER_MANAGEMENT_UPDATE"}
+	requiredResources := []string{"USER_MANAGEMENT_UPDATE"}
 
 	router.Put(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()
@@ -80,7 +67,7 @@ func update(
 			return errorcode.ErrCodeInvalidPayload
 		}
 
-		serviceDto, err := updateUserPayloadValidation(ctx, roleSqlAdapter, userSqlAdapter, buHttpAdapter, supplierHttpAdapter, userId, payload, modifier)
+		serviceDto, err := updateUserPayloadValidation(ctx, roleSqlAdapter, userSqlAdapter, userId, payload, modifier)
 		if err != nil {
 			return err
 		}
@@ -103,8 +90,6 @@ func updateUserPayloadValidation(
 	ctx context.Context,
 	roleSqlAdapter roleInterface.AdapterSQL,
 	userSqlAdapter userInterface.AdapterSQL,
-	buHttpAdapter buInterface.AdapterHttp,
-	supplierHttpAdapter supplierInterface.AdapterHttp,
 	userId int32,
 	payload *updateUserAPIPayload,
 	modifier string,
@@ -138,10 +123,6 @@ func updateUserPayloadValidation(
 	}
 
 	if err = updateUserPayloadRoleValidation(ctx, roleSqlAdapter, payload, currentDataUser, &newDataUser, now, modifier); err != nil {
-		return nil, err
-	}
-
-	if err = updateUserPayloadDetailValidation(ctx, buHttpAdapter, supplierHttpAdapter, payload, currentDataUser, &newDataUser); err != nil {
 		return nil, err
 	}
 
@@ -281,83 +262,6 @@ func updateUserPayloadNewStatusAssignment(
 		newStatus = statusenum.Draft
 	}
 	newDataUser.Status = newStatus.ToString()
-
-	return nil
-}
-
-func updateUserPayloadDetailValidation(
-	ctx context.Context,
-	buHttpAdapter buInterface.AdapterHttp,
-	supplierHttpAdapter supplierInterface.AdapterHttp,
-	payload *updateUserAPIPayload,
-	currentDataUser *model.User,
-	newDataUser *model.User,
-) error {
-	switch userenum.UserType(currentDataUser.Type) {
-	case userenum.Internal:
-		newDataUser.BusinessUnitAssignmentStatus = (*string)(&statusenum.Unassigned)
-
-		if currentDataUser.Status == statusenum.Active.ToString() {
-			if payload.Details == nil {
-				return errorcode.WithCustomMessage(errorcode.ErrCodeBadRequest, "Details is required")
-			}
-
-			if payload.Details.BusinessUnitLevel == nil {
-				return errorcode.WithCustomMessage(errorcode.ErrCodeBadRequest, "details.businessUnitLevel is required")
-			}
-
-			if payload.Details.BusinessUnitId == nil {
-				return errorcode.WithCustomMessage(errorcode.ErrCodeBadRequest, "details.businessUnitId is required")
-			}
-
-			bu, err := buHttpAdapter.GetBusinessUnits(ctx, *payload.Details.BusinessUnitLevel, *payload.Details.BusinessUnitId)
-			if err != nil {
-				return err
-			} else if len(bu) < 1 {
-				return errorcode.WithCustomMessage(errorcode.ErrCodeNotFound, "Business unit is not found")
-			}
-
-			decodedBuId, err := publicfacingutil.Decode(*payload.Details.BusinessUnitId)
-			if err != nil {
-				return err
-			}
-
-			newDataUser.Status = statusenum.Active.ToString()
-			newDataUser.BusinessUnitLevel = payload.Details.BusinessUnitLevel
-			newDataUser.BusinessUnitLocationID = &decodedBuId
-			newDataUser.BusinessUnitLocation = &bu[0].Name
-
-			switch statusenum.Status(*currentDataUser.BusinessUnitAssignmentStatus) {
-			case statusenum.Unassigned:
-				newDataUser.BusinessUnitAssignmentStatus = (*string)(&statusenum.PendingApproval)
-			case statusenum.Active:
-				newDataUser.BusinessUnitAssignmentStatus = (*string)(&statusenum.ActivePendingApproval)
-			}
-		}
-	case userenum.External:
-		if payload.Details == nil {
-			return errorcode.WithCustomMessage(errorcode.ErrCodeBadRequest, "Details is required")
-		}
-
-		if payload.Details.SupplierId == nil {
-			return errorcode.WithCustomMessage(errorcode.ErrCodeBadRequest, "details.supplierId is required")
-		}
-
-		supplier, err := supplierHttpAdapter.GetSupplier(ctx, *payload.Details.SupplierId, "")
-		if err != nil {
-			return err
-		} else if len(supplier) < 1 {
-			return errorcode.WithCustomMessage(errorcode.ErrCodeNotFound, "Supplier is not found")
-		}
-
-		decodedSupplierId, err := publicfacingutil.Decode(*payload.Details.SupplierId)
-		if err != nil {
-			return err
-		}
-
-		newDataUser.SupplierID = &decodedSupplierId
-		newDataUser.SupplierName = &supplier[0].Name
-	}
 
 	return nil
 }

@@ -3,8 +3,8 @@ package authentication
 import (
 	"context"
 
+	"golang-auth-app/app/adapters/sql/gorm/model"
 	statusenum "golang-auth-app/app/common/enums/status"
-	"golang-auth-app/app/datasources/sql/gorm/model"
 
 	authenticationDto "golang-auth-app/app/interfaces/authentication/dto"
 	authorizationDto "golang-auth-app/app/interfaces/authorization/jwt/dto"
@@ -15,7 +15,7 @@ import (
 	shautil "golang-auth-app/app/utils/sha"
 	sliceutil "golang-auth-app/app/utils/slice"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 )
 
 func (i *impl) Login(

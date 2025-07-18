@@ -3,13 +3,13 @@ package userenum
 type UserType string
 
 var (
-	Internal UserType = "INTERNAL"
-	External UserType = "EXTERNAL"
+	A UserType = "A"
+	B UserType = "B"
 )
 
 var enums = map[UserType]struct{}{
-	Internal: {},
-	External: {},
+	A: {},
+	B: {},
 }
 
 func IsValidType(s string) bool {

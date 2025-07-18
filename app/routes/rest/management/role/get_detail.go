@@ -26,7 +26,7 @@ func getDetail(
 	roleService roleInterface.Service,
 ) {
 	routePath := fmt.Sprintf("%s/detail/:roleId", prefix)
-	requiredResources := []string{"NTE_ROLE_MANAGEMENT_GET_DETAIL"}
+	requiredResources := []string{"ROLE_MANAGEMENT_GET_DETAIL"}
 
 	router.Get(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()

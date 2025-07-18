@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"golang-auth-app/app/adapters"
-	"golang-auth-app/app/datasources"
 	"golang-auth-app/app/interfaces/authorization/casbin"
 	"golang-auth-app/app/libraries"
 	"golang-auth-app/app/routes/rest"
@@ -42,7 +41,6 @@ func main() {
 
 		rest.Module,
 		adapters.Module,
-		datasources.Module,
 		libraries.Module,
 		services.Module,
 

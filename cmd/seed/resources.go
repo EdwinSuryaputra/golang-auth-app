@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 
 	"gorm.io/gorm/clause"
 )
@@ -168,302 +168,10 @@ func seedResource(
 func getResourceData() []*application {
 	return []*application{
 		{
-			Name:        "NTE",
-			PublicName:  "NTE",
-			Description: "Paradise NTE",
+			Name:        "A",
+			PublicName:  "A",
+			Description: "Application A",
 			Menus: []*menu{
-				{
-					Name:        "TRANSACTION",
-					PublicName:  "Transaction",
-					Description: "NTE Transaction",
-					Submenus: []*submenu{
-						{
-							Name:        "PURCHASE_CONTRACT",
-							PublicName:  "Purchase Contract",
-							Description: "NTE Transaction PCT",
-							Functions: []*function{
-								{
-									Name:         "VIEW_LIST",
-									PublicName:   "View List",
-									ResourceName: "NTE_PCT_GET_LIST",
-								},
-								{
-									Name:         "VIEW_DETAIL",
-									PublicName:   "View Detail",
-									ResourceName: "NTE_PCT_GET_DETAIL",
-								},
-								{
-									Name:         "VIEW_LOG_DETAIL",
-									PublicName:   "View Log Detail",
-									ResourceName: "NTE_PCT_GET_LOG_DETAIL",
-								},
-								{
-									Name:         "CREATE_DRAFT",
-									PublicName:   "Create Draft",
-									ResourceName: "NTE_PCT_CREATE_DRAFT",
-								},
-								{
-									Name:         "DELETE_DRAFT",
-									PublicName:   "Delete Draft",
-									ResourceName: "NTE_PCT_DELETE_DRAFT",
-								},
-								{
-									Name:         "UPDATE",
-									PublicName:   "Update",
-									ResourceName: "NTE_PCT_UPDATE",
-								},
-								{
-									Name:         "DRAFT_APPROVAL",
-									PublicName:   "Draft Approval",
-									ResourceName: "NTE_PCT_REVIEW",
-								},
-							},
-						},
-						{
-							Name:       "WORK_ORDER",
-							PublicName: "Work Order",
-							Functions: []*function{
-								{
-									Name:         "VIEW_LIST",
-									PublicName:   "View List",
-									ResourceName: "NTE_WO_GET_LIST",
-								},
-								{
-									Name:         "VIEW_DETAIL",
-									PublicName:   "View Detail",
-									ResourceName: "NTE_WO_GET_DETAIL",
-								},
-								{
-									Name:         "VIEW_LOG_DETAIL",
-									PublicName:   "View Log Detail",
-									ResourceName: "NTE_WO_GET_LOG_DETAIL",
-								},
-								{
-									Name:         "CREATE_DRAFT",
-									PublicName:   "Create Draft",
-									ResourceName: "NTE_WO_CREATE_DRAFT",
-								},
-								{
-									Name:         "DELETE_DRAFT",
-									PublicName:   "Delete Draft",
-									ResourceName: "NTE_WO_DELETE_DRAFT",
-								},
-								{
-									Name:         "UPDATE",
-									PublicName:   "Update",
-									ResourceName: "NTE_WO_UPDATE",
-								},
-								{
-									Name:         "DRAFT_APPROVAL",
-									PublicName:   "Draft Approval",
-									ResourceName: "NTE_WO_REVIEW",
-								},
-							},
-						},
-						{
-							Name:       "MANIFEST_PRODUCTION",
-							PublicName: "Manifest Production",
-							Functions: []*function{
-								{
-									Name:         "VIEW_LIST",
-									PublicName:   "View List",
-									ResourceName: "NTE_MP_GET_LIST",
-								},
-								{
-									Name:         "VIEW_DETAIL",
-									PublicName:   "View Detail",
-									ResourceName: "NTE_MP_GET_DETAIL",
-								},
-								{
-									Name:         "VIEW_LOG_DETAIL",
-									PublicName:   "View Log Detail",
-									ResourceName: "NTE_MP_GET_LOG_DETAIL",
-								},
-								{
-									Name:         "CREATE_DRAFT",
-									PublicName:   "Create Draft",
-									ResourceName: "NTE_MP_CREATE_DRAFT",
-								},
-								{
-									Name:         "DELETE_DRAFT",
-									PublicName:   "Delete Draft",
-									ResourceName: "NTE_MP_DELETE_DRAFT",
-								},
-								{
-									Name:         "UPDATE",
-									PublicName:   "Update",
-									ResourceName: "NTE_MP_UPDATE",
-								},
-								{
-									Name:         "DRAFT_APPROVAL",
-									PublicName:   "Draft Approval",
-									ResourceName: "NTE_MP_REVIEW",
-								},
-							},
-						},
-						{
-							Name:       "ATP_QUALITY_CONTROL",
-							PublicName: "ATP Quality Control",
-							Functions: []*function{
-								{
-									Name:         "VIEW_LIST",
-									PublicName:   "View List",
-									ResourceName: "NTE_ATP_QC_GET_LIST",
-								},
-								{
-									Name:         "VIEW_DETAIL",
-									PublicName:   "View Detail",
-									ResourceName: "NTE_ATP_QC_GET_DETAIL",
-								},
-								{
-									Name:         "VIEW_LOG_DETAIL",
-									PublicName:   "View Log Detail",
-									ResourceName: "NTE_ATP_QC_GET_LOG_DETAIL",
-								},
-								{
-									Name:         "CREATE_DRAFT",
-									PublicName:   "Create Draft",
-									ResourceName: "NTE_ATP_QC_CREATE_DRAFT",
-								},
-								{
-									Name:         "DELETE_DRAFT",
-									PublicName:   "Delete Draft",
-									ResourceName: "NTE_ATP_QC_DELETE_DRAFT",
-								},
-								{
-									Name:         "UPDATE",
-									PublicName:   "Update",
-									ResourceName: "NTE_ATP_QC_UPDATE",
-								},
-								{
-									Name:         "DRAFT_APPROVAL",
-									PublicName:   "Draft Approval",
-									ResourceName: "NTE_ATP_QC_REVIEW",
-								},
-							},
-						},
-						{
-							Name:       "MASTER_DATA",
-							PublicName: "Master Data",
-							Functions: []*function{
-								{
-									Name:         "GET_SUPPLIERS",
-									PublicName:   "Get Suppliers",
-									ResourceName: "NTE_GET_SUPPLIERS",
-								},
-								{
-									Name:         "GET_SUPPLIER_SITE",
-									PublicName:   "Get Supplier Sites",
-									ResourceName: "NTE_GET_SUPPLIER_SITES",
-								},
-								{
-									Name:         "GET_BUSINESS_UNITS",
-									PublicName:   "Get Business Units",
-									ResourceName: "NTE_GET_BUSINESS_UNITS",
-								},
-								{
-									Name:         "GET_AREA_HIERARCHIES",
-									PublicName:   "Get Area Hierarchies",
-									ResourceName: "NTE_GET_AREA_HIERARCHIES",
-								},
-							},
-						},
-					},
-				},
-				{
-					Name:       "REPORTING",
-					PublicName: "Reporting",
-					Submenus: []*submenu{
-						{
-							Name:       "STOCK_TREND",
-							PublicName: "Stock Trend",
-							Functions: []*function{
-								{
-									Name:         "VIEW_REPORT",
-									PublicName:   "View Report",
-									ResourceName: "NTE_REPORT_GET_STOCK_TREND",
-								},
-							},
-						},
-						{
-							Name:       "PCT_TRACKING",
-							PublicName: "PCT Tracking",
-							Functions: []*function{
-								{
-									Name:         "VIEW_REPORT",
-									PublicName:   "View Report",
-									ResourceName: "NTE_REPORT_GET_PCT_TRACKING",
-								},
-							},
-						},
-						{
-							Name:       "ITEM_STOCK_DETAIL",
-							PublicName: "Item Stock Detail",
-							Functions: []*function{
-								{
-									Name:         "VIEW_REPORT",
-									PublicName:   "View Report",
-									ResourceName: "NTE_REPORT_GET_ITEM_STOCK_DETAIL",
-								},
-							},
-						},
-						{
-							Name:       "INVENTORY_STATUS",
-							PublicName: "Inventory Status",
-							Functions: []*function{
-								{
-									Name:         "VIEW_REPORT",
-									PublicName:   "View Report",
-									ResourceName: "NTE_REPORT_GET_INVENTORY_STATUS",
-								},
-							},
-						},
-						{
-							Name:       "DISTRIBUTION",
-							PublicName: "Distribution",
-							Functions: []*function{
-								{
-									Name:         "VIEW_REPORT",
-									PublicName:   "View Report",
-									ResourceName: "NTE_REPORT_GET_DISTRIBUTION",
-								},
-							},
-						},
-						{
-							Name:       "SUPPLIER_PERFORMANCE",
-							PublicName: "Supplier Performance",
-							Functions: []*function{
-								{
-									Name:         "VIEW_REPORT",
-									PublicName:   "View Report",
-									ResourceName: "NTE_REPORT_GET_SUPPLIER_PERFORMANCE",
-								},
-							},
-						},
-						{
-							Name:       "MOVEMENT_STOCK",
-							PublicName: "Movement Stock",
-							Functions: []*function{
-								{
-									Name:         "VIEW_REPORT",
-									PublicName:   "View Report",
-									ResourceName: "NTE_REPORT_GET_MOVEMENT_STOCK",
-								},
-							},
-						},
-						{
-							Name:       "STOCK_OPNAME",
-							PublicName: "Stock Opname",
-							Functions: []*function{
-								{
-									Name:         "VIEW_REPORT",
-									PublicName:   "View Report",
-									ResourceName: "NTE_REPORT_GET_STOCK_OPNAME",
-								},
-							},
-						},
-					},
-				},
 				{
 					Name:       "SETUP",
 					PublicName: "Setup",
@@ -475,32 +183,32 @@ func getResourceData() []*application {
 								{
 									Name:         "VIEW_LIST",
 									PublicName:   "View List",
-									ResourceName: "NTE_ROLE_MANAGEMENT_GET_LIST",
+									ResourceName: "ROLE_MANAGEMENT_GET_LIST",
 								},
 								{
 									Name:         "VIEW_DETAIL",
 									PublicName:   "View Detail",
-									ResourceName: "NTE_ROLE_MANAGEMENT_GET_DETAIL",
+									ResourceName: "ROLE_MANAGEMENT_GET_DETAIL",
 								},
 								{
 									Name:         "VIEW_LOG_DETAIL",
 									PublicName:   "View Log Detail",
-									ResourceName: "NTE_ROLE_MANAGEMENT_GET_LOG_DETAIL",
+									ResourceName: "ROLE_MANAGEMENT_GET_LOG_DETAIL",
 								},
 								{
 									Name:         "CREATE_DRAFT",
 									PublicName:   "Create Draft",
-									ResourceName: "NTE_ROLE_MANAGEMENT_CREATE_DRAFT",
+									ResourceName: "ROLE_MANAGEMENT_CREATE_DRAFT",
 								},
 								{
 									Name:         "UPDATE",
 									PublicName:   "Update",
-									ResourceName: "NTE_ROLE_MANAGEMENT_UPDATE",
+									ResourceName: "ROLE_MANAGEMENT_UPDATE",
 								},
 								{
-									Name:         "DRAFT_APPROVAL",
-									PublicName:   "Draft Approval",
-									ResourceName: "NTE_ROLE_MANAGEMENT_REVIEW",
+									Name:         "REVIEW",
+									PublicName:   "Review",
+									ResourceName: "ROLE_MANAGEMENT_REVIEW",
 								},
 							},
 						},
@@ -511,68 +219,32 @@ func getResourceData() []*application {
 								{
 									Name:         "VIEW_LIST",
 									PublicName:   "View List",
-									ResourceName: "NTE_USER_MANAGEMENT_GET_LIST",
+									ResourceName: "USER_MANAGEMENT_GET_LIST",
 								},
 								{
 									Name:         "VIEW_DETAIL",
 									PublicName:   "View Detail",
-									ResourceName: "NTE_USER_MANAGEMENT_GET_DETAIL",
+									ResourceName: "USER_MANAGEMENT_GET_DETAIL",
 								},
 								{
 									Name:         "VIEW_LOG_DETAIL",
 									PublicName:   "View Log Detail",
-									ResourceName: "NTE_USER_MANAGEMENT_GET_LOG_DETAIL",
+									ResourceName: "USER_MANAGEMENT_GET_LOG_DETAIL",
 								},
 								{
 									Name:         "CREATE_DRAFT",
 									PublicName:   "Create Draft",
-									ResourceName: "NTE_USER_MANAGEMENT_CREATE_DRAFT",
+									ResourceName: "USER_MANAGEMENT_CREATE_DRAFT",
 								},
 								{
 									Name:         "UPDATE",
 									PublicName:   "Update",
-									ResourceName: "NTE_USER_MANAGEMENT_UPDATE",
+									ResourceName: "USER_MANAGEMENT_UPDATE",
 								},
 								{
 									Name:         "DRAFT_APPROVAL",
 									PublicName:   "Draft Approval",
-									ResourceName: "NTE_USER_MANAGEMENT_REVIEW",
-								},
-							},
-						},
-						{
-							Name:       "BU_REQUEST_BUCKET",
-							PublicName: "Bu Request Bucket",
-							Functions: []*function{
-								{
-									Name:         "VIEW_LIST",
-									PublicName:   "View List",
-									ResourceName: "NTE_BU_REQUEST_BUCKET_GET_LIST",
-								},
-								{
-									Name:         "VIEW_DETAIL",
-									PublicName:   "View Detail",
-									ResourceName: "NTE_BU_REQUEST_BUCKET_GET_DETAIL",
-								},
-								{
-									Name:         "VIEW_LOG_DETAIL",
-									PublicName:   "View Log Detail",
-									ResourceName: "NTE_BU_REQUEST_BUCKET_GET_LOG_DETAIL",
-								},
-								{
-									Name:         "CREATE_DRAFT",
-									PublicName:   "Create Draft",
-									ResourceName: "NTE_BU_REQUEST_BUCKET_CREATE_DRAFT",
-								},
-								{
-									Name:         "UPDATE",
-									PublicName:   "Update",
-									ResourceName: "NTE_BU_REQUEST_BUCKET_UPDATE",
-								},
-								{
-									Name:         "DRAFT_APPROVAL",
-									PublicName:   "Draft Approval",
-									ResourceName: "NTE_BU_REQUEST_BUCKET_REVIEW",
+									ResourceName: "USER_MANAGEMENT_REVIEW",
 								},
 							},
 						},

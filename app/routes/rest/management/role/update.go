@@ -9,10 +9,10 @@ import (
 
 	statusenum "golang-auth-app/app/common/enums/status"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 
+	"golang-auth-app/app/common/errorcode"
 	"golang-auth-app/app/interfaces/application"
-	"golang-auth-app/app/interfaces/errorcode"
 	"golang-auth-app/app/interfaces/management/role"
 	"golang-auth-app/app/interfaces/resource"
 	"golang-auth-app/app/routes/rest/middleware/authorization"
@@ -56,7 +56,7 @@ func update(
 	resourceSqlAdapter resource.AdapterSQL,
 ) {
 	routePath := fmt.Sprintf("%s/:roleId", prefix)
-	requiredResources := []string{"NTE_ROLE_MANAGEMENT_UPDATE"}
+	requiredResources := []string{"ROLE_MANAGEMENT_UPDATE"}
 
 	router.Put(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()

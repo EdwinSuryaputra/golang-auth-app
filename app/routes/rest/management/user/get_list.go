@@ -8,7 +8,7 @@ import (
 	"golang-auth-app/app/common/dto/request"
 	"golang-auth-app/app/common/dto/response"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 
 	userInterface "golang-auth-app/app/interfaces/management/user"
 	userDto "golang-auth-app/app/interfaces/management/user/dto"
@@ -68,7 +68,7 @@ func getList(
 	userService userInterface.Service,
 ) {
 	routePath := fmt.Sprintf("%s/list", prefix)
-	requiredResources := []string{"NTE_USER_MANAGEMENT_GET_LIST"}
+	requiredResources := []string{"USER_MANAGEMENT_GET_LIST"}
 	startTime := time.Now()
 
 	router.Post(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {

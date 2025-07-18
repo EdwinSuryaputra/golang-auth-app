@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 
 	shautil "golang-auth-app/app/utils/sha"
 )

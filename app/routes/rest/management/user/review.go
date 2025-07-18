@@ -7,7 +7,7 @@ import (
 	reviewenum "golang-auth-app/app/common/enums/review"
 	statusenum "golang-auth-app/app/common/enums/status"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 
 	userInterface "golang-auth-app/app/interfaces/management/user"
 	userDto "golang-auth-app/app/interfaces/management/user/dto"
@@ -39,7 +39,7 @@ func review(
 	userService userInterface.Service,
 ) {
 	routePath := fmt.Sprintf("%s/review/:id", prefix)
-	requiredResources := []string{"NTE_USER_MANAGEMENT_REVIEW"}
+	requiredResources := []string{"USER_MANAGEMENT_REVIEW"}
 
 	router.Patch(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()

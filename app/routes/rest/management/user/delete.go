@@ -5,7 +5,7 @@ import (
 
 	statusenum "golang-auth-app/app/common/enums/status"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 	"golang-auth-app/app/interfaces/generic"
 	"golang-auth-app/app/interfaces/management/role"
 	"golang-auth-app/app/interfaces/management/user"
@@ -35,7 +35,7 @@ func delete(
 	roleSqlAdapter role.AdapterSQL,
 ) {
 	routePath := fmt.Sprintf("%s/:id", prefix)
-	requiredResources := []string{"NTE_USER_MANAGEMENT_DELETE_DRAFT"}
+	requiredResources := []string{"USER_MANAGEMENT_DELETE_DRAFT"}
 
 	router.Delete(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()

@@ -8,7 +8,7 @@ import (
 	"golang-auth-app/app/common/dto/request"
 	"golang-auth-app/app/common/dto/response"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 
 	roleInterface "golang-auth-app/app/interfaces/management/role"
 
@@ -53,7 +53,7 @@ func getList(
 	roleService roleInterface.Service,
 ) {
 	routePath := fmt.Sprintf("%s/list", prefix)
-	requiredResources := []string{"NTE_ROLE_MANAGEMENT_GET_LIST"}
+	requiredResources := []string{"ROLE_MANAGEMENT_GET_LIST"}
 	startTime := time.Now()
 
 	router.Post(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {

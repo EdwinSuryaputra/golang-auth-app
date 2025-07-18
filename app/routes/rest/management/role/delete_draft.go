@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/rotisserie/eris"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 	"golang-auth-app/app/interfaces/generic"
 	"golang-auth-app/app/interfaces/management/role"
 	"golang-auth-app/app/routes/rest/middleware/authorization"
@@ -32,7 +32,7 @@ func deleteDraft(
 	roleSqlAdapter role.AdapterSQL,
 ) {
 	routePath := fmt.Sprintf("%s/:roleId", prefix)
-	requiredResources := []string{"NTE_ROLE_MANAGEMENT_DELETE_DRAFT"}
+	requiredResources := []string{"ROLE_MANAGEMENT_DELETE_DRAFT"}
 
 	router.Delete(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()

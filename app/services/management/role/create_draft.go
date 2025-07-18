@@ -3,7 +3,7 @@ package role
 import (
 	"context"
 	"fmt"
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 
 	"github.com/google/uuid"
 )

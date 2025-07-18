@@ -2,7 +2,7 @@ package authentication
 
 import (
 	"context"
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 	shautil "golang-auth-app/app/utils/sha"
 	"time"
 )

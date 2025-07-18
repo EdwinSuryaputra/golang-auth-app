@@ -6,8 +6,8 @@ import (
 	casbinDto "golang-auth-app/app/interfaces/authorization/casbin/dto"
 	jwtDto "golang-auth-app/app/interfaces/authorization/jwt/dto"
 
+	"golang-auth-app/app/common/errorcode"
 	jwtInterface "golang-auth-app/app/interfaces/authorization/jwt"
-	"golang-auth-app/app/interfaces/errorcode"
 	ctxutil "golang-auth-app/app/utils/ctx"
 	sliceutil "golang-auth-app/app/utils/slice"
 

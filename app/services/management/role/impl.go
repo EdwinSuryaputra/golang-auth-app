@@ -15,7 +15,7 @@ type impl struct {
 	resourceSqlAdapter     resourceInterface.AdapterSQL
 	casbinService          casbinInterface.Service
 	jwtService             jwtInterface.Service
-	activityLogHttpAdapter activityLogInterface.AdapterHttp
+	activityLogHttpAdapter activityLogInterface.AdapterSql
 }
 
 func New(
@@ -24,7 +24,7 @@ func New(
 	resourceSqlAdapter resourceInterface.AdapterSQL,
 	casbinService casbinInterface.Service,
 	jwtService jwtInterface.Service,
-	activityLogHttpAdapter activityLogInterface.AdapterHttp,
+	activityLogHttpAdapter activityLogInterface.AdapterSql,
 ) roleInterface.Service {
 	return &impl{
 		roleSqlAdapter:         roleSqlAdapter,

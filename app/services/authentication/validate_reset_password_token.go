@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 
+	"golang-auth-app/app/common/errorcode"
 	authnDto "golang-auth-app/app/interfaces/authentication/dto"
-	"golang-auth-app/app/interfaces/errorcode"
 )
 
 func (i *impl) ValidateResetPasswordToken(

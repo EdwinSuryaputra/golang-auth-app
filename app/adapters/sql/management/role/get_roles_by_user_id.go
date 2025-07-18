@@ -4,8 +4,8 @@ import (
 	"context"
 
 	statusenum "golang-auth-app/app/common/enums/status"
-	"golang-auth-app/app/datasources/sql/gorm/model"
-	"golang-auth-app/app/datasources/sql/gorm/query"
+	"golang-auth-app/app/adapters/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/query"
 
 	roleDto "golang-auth-app/app/interfaces/management/role/dto"
 

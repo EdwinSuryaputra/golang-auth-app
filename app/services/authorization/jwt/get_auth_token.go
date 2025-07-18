@@ -9,7 +9,7 @@ import (
 
 	jwtDto "golang-auth-app/app/interfaces/authorization/jwt/dto"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 )
 
 func (i *impl) GetAuthToken(ctx context.Context, tokenString string) (*jwtDto.AuthTokenValue, error) {

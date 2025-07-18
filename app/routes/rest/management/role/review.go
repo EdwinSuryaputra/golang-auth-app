@@ -7,7 +7,7 @@ import (
 	reviewenum "golang-auth-app/app/common/enums/review"
 	statusenum "golang-auth-app/app/common/enums/status"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 	"golang-auth-app/app/interfaces/management/role"
 	"golang-auth-app/app/routes/rest/middleware/authorization"
 	publicfacingutil "golang-auth-app/app/utils/publicfacing"
@@ -36,7 +36,7 @@ func review(
 	roleSqlAdapter role.AdapterSQL,
 ) {
 	routePath := fmt.Sprintf("%s/review/:roleId", prefix)
-	requiredResources := []string{"NTE_ROLE_MANAGEMENT_REVIEW"}
+	requiredResources := []string{"ROLE_MANAGEMENT_REVIEW"}
 
 	router.Patch(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()

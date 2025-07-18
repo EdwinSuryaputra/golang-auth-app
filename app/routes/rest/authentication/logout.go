@@ -3,8 +3,8 @@ package authentication
 import (
 	"fmt"
 
+	"golang-auth-app/app/common/errorcode"
 	authenticationInterface "golang-auth-app/app/interfaces/authentication"
-	"golang-auth-app/app/interfaces/errorcode"
 
 	"github.com/gofiber/fiber/v2"
 )

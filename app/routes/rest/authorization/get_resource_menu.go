@@ -6,7 +6,7 @@ import (
 	jwtInterface "golang-auth-app/app/interfaces/authorization/jwt"
 	resourceDto "golang-auth-app/app/interfaces/resource/dto"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 
 	"github.com/gofiber/fiber/v2"
 )

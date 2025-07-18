@@ -3,7 +3,7 @@ package user
 import (
 	"context"
 
-	"golang-auth-app/app/datasources/sql/gorm/query"
+	"golang-auth-app/app/adapters/sql/gorm/query"
 
 	userDto "golang-auth-app/app/interfaces/management/user/dto"
 
@@ -20,31 +20,31 @@ func (i *impl) GetPaginated(
 	qq := userQuery.WithContext(ctx)
 
 	if payload.Username != "" {
-		qq = qq.Where(userQuery.Username.Like("%" + payload.Username + "%"))
+		qq = qq.Where(userQuery.Username.Like(payload.Username + "%"))
 	}
 
 	if payload.Fullname != "" {
-		qq = qq.Where(userQuery.FullName.Like("%" + payload.Fullname + "%"))
+		qq = qq.Where(userQuery.FullName.Like(payload.Fullname + "%"))
 	}
 
 	if payload.Type != "" {
-		qq = qq.Where(userQuery.Type.Like("%" + payload.Type + "%"))
+		qq = qq.Where(userQuery.Type.Like(payload.Type + "%"))
 	}
 
 	if payload.SupplierName != "" {
-		qq = qq.Where(userQuery.Type.Like("%" + payload.SupplierName + "%"))
+		qq = qq.Where(userQuery.Type.Like(payload.SupplierName + "%"))
 	}
 
 	if payload.BuLevel != "" {
-		qq = qq.Where(userQuery.Type.Like("%" + payload.BuLevel + "%"))
+		qq = qq.Where(userQuery.Type.Like(payload.BuLevel + "%"))
 	}
 
 	if payload.BuLocation != "" {
-		qq = qq.Where(userQuery.Type.Like("%" + payload.BuLocation + "%"))
+		qq = qq.Where(userQuery.Type.Like(payload.BuLocation + "%"))
 	}
 
 	if payload.Status != "" {
-		qq = qq.Where(userQuery.Status.Like("%" + payload.Status + "%"))
+		qq = qq.Where(userQuery.Status.Like(payload.Status + "%"))
 	}
 
 	if payload.StartDate != nil {
@@ -64,7 +64,7 @@ func (i *impl) GetPaginated(
 	}
 
 	if payload.CreatedBy != "" {
-		qq = qq.Where(userQuery.CreatedBy.Like("%" + payload.CreatedBy + "%"))
+		qq = qq.Where(userQuery.CreatedBy.Like(payload.CreatedBy + "%"))
 	}
 
 	if payload.CreatedAt != nil {
@@ -76,7 +76,7 @@ func (i *impl) GetPaginated(
 	}
 
 	if payload.UpdatedBy != "" {
-		qq = qq.Where(userQuery.UpdatedBy.Like("%" + payload.UpdatedBy + "%"))
+		qq = qq.Where(userQuery.UpdatedBy.Like(payload.UpdatedBy + "%"))
 	}
 
 	if payload.UpdatedAt != nil {
@@ -92,9 +92,6 @@ func (i *impl) GetPaginated(
 		userQuery.Username.As("username"),
 		userQuery.FullName.As("fullName"),
 		userQuery.Type.As("type"),
-		userQuery.SupplierName.As("supplierName"),
-		userQuery.BusinessUnitLevel.As("buLevel"),
-		userQuery.BusinessUnitLocation.As("buLocation"),
 		userQuery.Status.As("status"),
 		userQuery.StartDate.As("startDate"),
 		userQuery.EndDate.As("endDate"),

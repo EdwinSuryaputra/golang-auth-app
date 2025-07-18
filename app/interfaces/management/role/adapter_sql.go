@@ -3,7 +3,7 @@ package role
 import (
 	"context"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 
 	roleDto "golang-auth-app/app/interfaces/management/role/dto"
 )

@@ -8,8 +8,8 @@ import (
 	statusenum "golang-auth-app/app/common/enums/status"
 	userenum "golang-auth-app/app/common/enums/user"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/adapters/sql/gorm/model"
+	"golang-auth-app/app/common/errorcode"
 	"golang-auth-app/app/interfaces/management/user"
 	"golang-auth-app/app/routes/rest/middleware/authorization"
 
@@ -40,7 +40,7 @@ func createDraft(
 	userService user.Service,
 ) {
 	routePath := fmt.Sprintf("%s/", prefix)
-	requiredResources := []string{"NTE_USER_MANAGEMENT_CREATE_DRAFT"}
+	requiredResources := []string{"USER_MANAGEMENT_CREATE_DRAFT"}
 
 	router.Post(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()

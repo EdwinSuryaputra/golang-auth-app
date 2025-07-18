@@ -4,7 +4,7 @@ import (
 	"fmt"
 	authenticationInterface "golang-auth-app/app/interfaces/authentication"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 
 	"github.com/gofiber/fiber/v2"
 )

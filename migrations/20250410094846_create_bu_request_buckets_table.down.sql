@@ -1,1 +1,0 @@
-DROP TABLE bu_request_buckets;

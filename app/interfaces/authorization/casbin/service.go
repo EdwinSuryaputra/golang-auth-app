@@ -3,7 +3,7 @@ package casbin
 import (
 	"context"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 	casbinDto "golang-auth-app/app/interfaces/authorization/casbin/dto"
 )
 

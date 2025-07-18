@@ -1,6 +1,6 @@
 application:
-  name: "iam-api"
-  port: 10530
+  name: golang-auth-app
+  port: 3500
   env: LOCAL
   tls: 
     is_enabled: false
@@ -15,16 +15,15 @@ datasource:
   postgres:
     host: "localhost"
     port: 5432
-    database: iam-api
-    username: myuser
-    password: 123456
+    database: postgres
+    username: postgres
+    password: postgres
     sslmode: disable
     retry: 3
     retry_interval: 10s
     pool_max_conns: 10
   redis:
     host: localhost
-    # host: redis-dev
     port: 6379
     pass:
 route:
@@ -36,10 +35,10 @@ internal_service:
       get_activity_log: /api/v1/activity_log/ppoc
 external_service:
   smtp:
-    host: mail.delinnce.com
+    host: mail.Golauthapp.com
     port: "587"
-    user: "gananta@delinnce.com"
-    password: "Melon12!1"
+    user: "primary@Golauthapp.com"
+    password: "golauthapp123"
 module:
   auth:
     jwt:
@@ -48,8 +47,8 @@ module:
       is_forever_login_persist_forever: false
       forever_login_duration_in_seconds: 31622400
     web_page_url:
-      login_url: "https://dev.delinnce.com"
-      reset_password_url: "https://dev.delinnce.com/reset-password"
+      login_url: "https://dev.golauthapp.com"
+      reset_password_url: "https://dev.golauthapp.com/reset-password"
   user:
     payload_validation:
       username_min_digit: 3

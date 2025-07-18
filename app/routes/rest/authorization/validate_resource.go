@@ -9,7 +9,7 @@ import (
 	jwtDto "golang-auth-app/app/interfaces/authorization/jwt/dto"
 	sliceutil "golang-auth-app/app/utils/slice"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 
 	"github.com/gofiber/fiber/v2"
 )

@@ -3,13 +3,13 @@ package roleenum
 type RoleType string
 
 var (
-	Internal RoleType = "INTERNAL"
-	External RoleType = "EXTERNAL"
+	A RoleType = "A"
+	B RoleType = "B"
 )
 
 var enums = map[RoleType]struct{}{
-	Internal: {},
-	External: {},
+	A: {},
+	B: {},
 }
 
 func IsValidRoleType(s string) bool {

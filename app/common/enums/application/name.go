@@ -3,15 +3,11 @@ package applicationenum
 type Name string
 
 const (
-	Nte Name = "NTE"
-	PRN Name = "PRN"
-	HRN Name = "HRN"
+	A Name = "A"
 )
 
 var enums = map[Name]struct{}{
-	Nte: {},
-	PRN: {},
-	HRN: {},
+	A: {},
 }
 
 func IsValidEnum(s string) bool {

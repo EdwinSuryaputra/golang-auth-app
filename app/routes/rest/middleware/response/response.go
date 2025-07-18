@@ -6,7 +6,7 @@ import (
 	"runtime/debug"
 
 	loggerenum "golang-auth-app/app/common/enums/logger"
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/rotisserie/eris"

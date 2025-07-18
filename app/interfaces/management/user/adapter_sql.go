@@ -3,7 +3,7 @@ package user
 import (
 	"context"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 
 	userDto "golang-auth-app/app/interfaces/management/user/dto"
 )

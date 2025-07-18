@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"strings"
 
-	userenum "golang-auth-app/app/common/enums/user"
-
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 
 	userDto "golang-auth-app/app/interfaces/management/user/dto"
 
@@ -77,38 +75,6 @@ func (i *impl) GetDetail(
 		UpdatedAt:     existingUser.UpdatedAt,
 		UpdatedBy:     existingUser.UpdatedBy,
 		ActivityLogId: existingUser.ActivityLogID,
-	}
-
-	switch userenum.UserType(existingUser.Type) {
-	case userenum.Internal:
-		if existingUser.BusinessUnitLevel != nil &&
-			existingUser.BusinessUnitLocationID != nil &&
-			existingUser.BusinessUnitLocation != nil &&
-			existingUser.BusinessUnitAssignmentStatus != nil {
-			encodedBuId, err := publicfacingutil.Encode(*existingUser.BusinessUnitLocationID)
-			if err != nil {
-				return nil, err
-			}
-
-			result.BusinessUnit = &userDto.ServiceGetDetailBusinessUnit{
-				Id:     encodedBuId,
-				Level:  *existingUser.BusinessUnitLevel,
-				Name:   *existingUser.BusinessUnitLocation,
-				Status: *existingUser.BusinessUnitAssignmentStatus,
-			}
-		}
-	case userenum.External:
-		if existingUser.SupplierID != nil && existingUser.SupplierName != nil {
-			encodedSupplierId, err := publicfacingutil.Encode(*existingUser.SupplierID)
-			if err != nil {
-				return nil, err
-			}
-
-			result.Supplier = &userDto.ServiceGetDetailSupplier{
-				Id:   encodedSupplierId,
-				Name: *existingUser.SupplierName,
-			}
-		}
 	}
 
 	return result, nil

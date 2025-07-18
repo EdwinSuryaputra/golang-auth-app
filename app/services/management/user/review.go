@@ -11,9 +11,9 @@ import (
 	statusenum "golang-auth-app/app/common/enums/status"
 	config "golang-auth-app/config"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 	userDto "golang-auth-app/app/interfaces/management/user/dto"
 	"golang-auth-app/app/interfaces/smtp"
 
@@ -128,10 +128,6 @@ func (i *impl) Review(
 			toBeUpdatedUser.Email = existingTempUser.Email
 			toBeUpdatedUser.PhoneNumber = existingTempUser.PhoneNumber
 			toBeUpdatedUser.AssignedRoles = existingTempUser.AssignedRoles
-			toBeUpdatedUser.BusinessUnitLevel = existingTempUser.BusinessUnitLevel
-			toBeUpdatedUser.BusinessUnitLocationID = existingTempUser.BusinessUnitLocationID
-			toBeUpdatedUser.BusinessUnitLocation = existingTempUser.BusinessUnitLocation
-			toBeUpdatedUser.SupplierID = existingTempUser.SupplierID
 		}
 	}
 
@@ -240,7 +236,7 @@ func (i *impl) sendEmailNewUser(ctx context.Context, username, email, defaultPas
 		User:       cfgSMTP.User,
 		Password:   cfgSMTP.Password,
 		Recipients: []string{email},
-		Subject:    "Welcome to Delinnce - Your Account Has Been Created",
+		Subject:    "Welcome to Golauthapp - Your Account Has Been Created",
 		HTMLBody:   htmlBody,
 	}); err != nil {
 		return err

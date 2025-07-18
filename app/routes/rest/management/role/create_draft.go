@@ -8,9 +8,9 @@ import (
 	roleenum "golang-auth-app/app/common/enums/role"
 	statusenum "golang-auth-app/app/common/enums/status"
 
-	"golang-auth-app/app/datasources/sql/gorm/model"
+	"golang-auth-app/app/adapters/sql/gorm/model"
+	"golang-auth-app/app/common/errorcode"
 	"golang-auth-app/app/interfaces/application"
-	"golang-auth-app/app/interfaces/errorcode"
 	"golang-auth-app/app/interfaces/management/role"
 	"golang-auth-app/app/routes/rest/middleware/authorization"
 	publicfacingutil "golang-auth-app/app/utils/publicfacing"
@@ -42,7 +42,7 @@ func createDraft(
 	roleSqlAdapter role.AdapterSQL,
 ) {
 	routePath := fmt.Sprintf("%s/", prefix)
-	requiredResources := []string{"NTE_ROLE_MANAGEMENT_CREATE_DRAFT"}
+	requiredResources := []string{"ROLE_MANAGEMENT_CREATE_DRAFT"}
 
 	router.Post(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()

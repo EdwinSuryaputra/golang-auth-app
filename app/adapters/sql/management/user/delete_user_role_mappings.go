@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"golang-auth-app/app/datasources/sql/gorm/query"
+	"golang-auth-app/app/adapters/sql/gorm/query"
 
 	"github.com/rotisserie/eris"
 )

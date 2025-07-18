@@ -16,7 +16,7 @@ To execute SQL migrations in the `migrations` directory, run the following comma
 make migrate-sql
 ```
 
-To generate `gorm.io/gen` files into `/app/datasources/sql/gorm/`, run the following command:
+To generate `gorm.io/gen` files into `/app/adapters/sql/gorm/`, run the following command:
 
 ```
 make generate-gorm-model

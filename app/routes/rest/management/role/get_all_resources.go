@@ -20,7 +20,7 @@ func getAllResources(
 	resourceService resource.Service,
 ) {
 	routePath := fmt.Sprintf("%s/all-resources", prefix)
-	requiredResources := []string{"NTE_ROLE_MANAGEMENT_GET_LIST"}
+	requiredResources := []string{"ROLE_MANAGEMENT_GET_LIST"}
 
 	router.Get(routePath, authMiddleware.Authorize(requiredResources), func(c *fiber.Ctx) error {
 		ctx := c.UserContext()

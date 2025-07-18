@@ -3,7 +3,7 @@ package resource
 import (
 	"context"
 
-	"golang-auth-app/app/datasources/sql/gorm/query"
+	"golang-auth-app/app/adapters/sql/gorm/query"
 	resourceDto "golang-auth-app/app/interfaces/resource/dto"
 
 	"github.com/rotisserie/eris"

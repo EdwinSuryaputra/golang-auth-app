@@ -7,7 +7,7 @@ import (
 	authenticationInterface "golang-auth-app/app/interfaces/authentication"
 	authenticationDto "golang-auth-app/app/interfaces/authentication/dto"
 
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 
 	"github.com/gofiber/fiber/v2"
 )

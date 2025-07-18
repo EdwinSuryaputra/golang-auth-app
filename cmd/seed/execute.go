@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"golang-auth-app/app/datasources/sql/gorm"
+	"golang-auth-app/app/adapters/sql/gorm"
 	config "golang-auth-app/config"
 
 	"gorm.io/gorm/clause"

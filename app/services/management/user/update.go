@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
+	"golang-auth-app/app/adapters/sql/gorm/model"
+	
 	statusenum "golang-auth-app/app/common/enums/status"
-	userenum "golang-auth-app/app/common/enums/user"
-	"golang-auth-app/app/datasources/sql/gorm/model"
 
 	userDto "golang-auth-app/app/interfaces/management/user/dto"
 )
@@ -30,12 +30,6 @@ func (i *impl) Update(
 			FullName:                     payload.CurrentDataUser.FullName,
 			PhoneNumber:                  payload.CurrentDataUser.PhoneNumber,
 			Description:                  payload.CurrentDataUser.Description,
-			BusinessUnitLevel:            payload.CurrentDataUser.BusinessUnitLevel,
-			BusinessUnitLocationID:       payload.CurrentDataUser.BusinessUnitLocationID,
-			BusinessUnitLocation:         payload.CurrentDataUser.BusinessUnitLocation,
-			BusinessUnitAssignmentStatus: payload.CurrentDataUser.BusinessUnitAssignmentStatus,
-			SupplierID:                   payload.CurrentDataUser.SupplierID,
-			SupplierName:                 payload.CurrentDataUser.SupplierName,
 			AssignedRoles:                payload.CurrentDataUser.AssignedRoles,
 			CreatedBy:                    payload.CurrentDataUser.CreatedBy,
 			CreatedAt:                    payload.CurrentDataUser.CreatedAt,
@@ -56,23 +50,6 @@ func (i *impl) Update(
 
 	if err = i.userSqlAdapter.UpdateUser(ctx, payload.NewDataUser); err != nil {
 		return err
-	}
-
-	if userenum.UserType(payload.NewDataUser.Type) == userenum.Internal &&
-		payload.NewDataUser.BusinessUnitLevel != nil &&
-		payload.NewDataUser.BusinessUnitLocationID != nil &&
-		payload.NewDataUser.BusinessUnitLocation != nil {
-		if err = i.burbSqlAdapter.InsertBuRequestBucket(ctx, &model.BuRequestBucket{
-			UserID:                 payload.NewDataUser.ID,
-			BusinessUnitLevel:      *payload.NewDataUser.BusinessUnitLevel,
-			BusinessUnitLocationID: *payload.NewDataUser.BusinessUnitLocationID,
-			BusinessUnitLocation:   *payload.NewDataUser.BusinessUnitLocation,
-			Status:                 *payload.NewDataUser.BusinessUnitAssignmentStatus,
-			CreatedBy:              payload.NewDataUser.UpdatedBy,
-			CreatedAt:              payload.NewDataUser.UpdatedAt,
-		}); err != nil {
-			return err
-		}
 	}
 
 	if payload.CurrentDataUser.ActivityLogID != nil {

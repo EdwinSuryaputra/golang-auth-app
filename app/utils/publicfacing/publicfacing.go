@@ -1,7 +1,7 @@
 package publicfacingutil
 
 import (
-	"golang-auth-app/app/interfaces/errorcode"
+	"golang-auth-app/app/common/errorcode"
 
 	"github.com/rotisserie/eris"
 	"github.com/speps/go-hashids/v2"
