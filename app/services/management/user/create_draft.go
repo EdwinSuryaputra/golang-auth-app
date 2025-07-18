@@ -17,7 +17,7 @@ func (i *impl) CreateDraft(ctx context.Context, newUser *model.User) error {
 		return err
 	}
 
-	err = i.activityLogHttpAdapter.Insert(ctx, activityLogId, fmt.Sprintf("User was created draft by %s", newUser.CreatedBy), "SUCCESS")
+	err = i.activityLogSqlAdapter.Insert(ctx, activityLogId, fmt.Sprintf("User was created draft by %s", newUser.CreatedBy), "SUCCESS")
 	if err != nil {
 		return err
 	}

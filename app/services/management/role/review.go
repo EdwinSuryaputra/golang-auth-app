@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"time"
 
+	"golang-auth-app/app/adapters/sql/gorm/model"
 	reviewenum "golang-auth-app/app/common/enums/review"
 	statusenum "golang-auth-app/app/common/enums/status"
-	"golang-auth-app/app/adapters/sql/gorm/model"
 	roleInterface "golang-auth-app/app/interfaces/management/role"
 
 	sliceutil "golang-auth-app/app/utils/slice"
@@ -125,7 +125,7 @@ func (i *impl) Review(ctx context.Context, payload *roleInterface.ServiceReviewR
 	}
 
 	if activityLogMessage != "" && payload.ExistingRole.ActivityLogID != nil {
-		if err = i.activityLogHttpAdapter.Insert(ctx, *payload.ExistingRole.ActivityLogID, activityLogMessage, "SUCCESS"); err != nil {
+		if err = i.activityLogSqlAdapter.Insert(ctx, *payload.ExistingRole.ActivityLogID, activityLogMessage, "SUCCESS"); err != nil {
 			return err
 		}
 	}

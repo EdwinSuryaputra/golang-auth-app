@@ -20,7 +20,7 @@ func (i *impl) CreateDraft(
 		return err
 	}
 
-	err = i.activityLogHttpAdapter.Insert(ctx, activityLogId, fmt.Sprintf("Role was created draft by %s", newRole.CreatedBy), "SUCCESS")
+	err = i.activityLogSqlAdapter.Insert(ctx, activityLogId, fmt.Sprintf("Role was created draft by %s", newRole.CreatedBy), "SUCCESS")
 	if err != nil {
 		return err
 	}

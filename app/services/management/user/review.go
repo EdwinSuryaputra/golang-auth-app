@@ -149,7 +149,7 @@ func (i *impl) Review(
 	}
 
 	if activityLogMessage != "" && payload.ExistingUser.ActivityLogID != nil {
-		err = i.activityLogHttpAdapter.Insert(ctx, *payload.ExistingUser.ActivityLogID, activityLogMessage, "SUCCESS")
+		err = i.activityLogSqlAdapter.Insert(ctx, *payload.ExistingUser.ActivityLogID, activityLogMessage, "SUCCESS")
 		if err != nil {
 			return err
 		}

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	statusenum "golang-auth-app/app/common/enums/status"
 	"golang-auth-app/app/adapters/sql/gorm/model"
+	statusenum "golang-auth-app/app/common/enums/status"
 	roleInterface "golang-auth-app/app/interfaces/management/role"
 )
 
@@ -61,7 +61,7 @@ func (i *impl) Update(ctx context.Context, payload *roleInterface.ServiceUpdateR
 		}
 
 		if message != "" {
-			err = i.activityLogHttpAdapter.Insert(ctx, *payload.CurrentDataRole.ActivityLogID, message, "SUCCESS")
+			err = i.activityLogSqlAdapter.Insert(ctx, *payload.CurrentDataRole.ActivityLogID, message, "SUCCESS")
 			if err != nil {
 				return err
 			}

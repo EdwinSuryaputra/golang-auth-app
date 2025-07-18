@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"golang-auth-app/app/adapters/sql/gorm/model"
-	
+
 	statusenum "golang-auth-app/app/common/enums/status"
 
 	userDto "golang-auth-app/app/interfaces/management/user/dto"
@@ -24,17 +24,17 @@ func (i *impl) Update(
 		}
 
 		tempUserPayload := &model.TempUser{
-			UserID:                       payload.CurrentDataUser.ID,
-			Username:                     payload.CurrentDataUser.Username,
-			Email:                        payload.CurrentDataUser.Email,
-			FullName:                     payload.CurrentDataUser.FullName,
-			PhoneNumber:                  payload.CurrentDataUser.PhoneNumber,
-			Description:                  payload.CurrentDataUser.Description,
-			AssignedRoles:                payload.CurrentDataUser.AssignedRoles,
-			CreatedBy:                    payload.CurrentDataUser.CreatedBy,
-			CreatedAt:                    payload.CurrentDataUser.CreatedAt,
-			UpdatedBy:                    payload.CurrentDataUser.UpdatedBy,
-			UpdatedAt:                    payload.CurrentDataUser.UpdatedAt,
+			UserID:        payload.CurrentDataUser.ID,
+			Username:      payload.CurrentDataUser.Username,
+			Email:         payload.CurrentDataUser.Email,
+			FullName:      payload.CurrentDataUser.FullName,
+			PhoneNumber:   payload.CurrentDataUser.PhoneNumber,
+			Description:   payload.CurrentDataUser.Description,
+			AssignedRoles: payload.CurrentDataUser.AssignedRoles,
+			CreatedBy:     payload.CurrentDataUser.CreatedBy,
+			CreatedAt:     payload.CurrentDataUser.CreatedAt,
+			UpdatedBy:     payload.CurrentDataUser.UpdatedBy,
+			UpdatedAt:     payload.CurrentDataUser.UpdatedAt,
 		}
 
 		if existingTempUser != nil {
@@ -64,7 +64,7 @@ func (i *impl) Update(
 		}
 
 		if message != "" {
-			err = i.activityLogHttpAdapter.Insert(ctx, *payload.CurrentDataUser.ActivityLogID, message, "SUCCESS")
+			err = i.activityLogSqlAdapter.Insert(ctx, *payload.CurrentDataUser.ActivityLogID, message, "SUCCESS")
 			if err != nil {
 				return err
 			}

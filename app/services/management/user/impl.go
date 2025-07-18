@@ -9,11 +9,11 @@ import (
 )
 
 type impl struct {
-	roleSqlAdapter         roleInterface.AdapterSQL
-	userSqlAdapter         userInterface.AdapterSQL
-	casbinService          casbinInterface.Service
-	smtpAdapter            smtpInterface.AdapterSMTP
-	activityLogHttpAdapter activityLogInterface.AdapterSql
+	roleSqlAdapter        roleInterface.AdapterSQL
+	userSqlAdapter        userInterface.AdapterSQL
+	casbinService         casbinInterface.Service
+	smtpAdapter           smtpInterface.AdapterSMTP
+	activityLogSqlAdapter activityLogInterface.AdapterSQL
 }
 
 func New(
@@ -21,13 +21,13 @@ func New(
 	userSqlAdapter userInterface.AdapterSQL,
 	casbinService casbinInterface.Service,
 	smtpAdapter smtpInterface.AdapterSMTP,
-	activityLogHttpAdapter activityLogInterface.AdapterSql,
+	activityLogSqlAdapter activityLogInterface.AdapterSQL,
 ) userInterface.Service {
 	return &impl{
-		roleSqlAdapter:         roleSqlAdapter,
-		userSqlAdapter:         userSqlAdapter,
-		casbinService:          casbinService,
-		smtpAdapter:            smtpAdapter,
-		activityLogHttpAdapter: activityLogHttpAdapter,
+		roleSqlAdapter:        roleSqlAdapter,
+		userSqlAdapter:        userSqlAdapter,
+		casbinService:         casbinService,
+		smtpAdapter:           smtpAdapter,
+		activityLogSqlAdapter: activityLogSqlAdapter,
 	}
 }

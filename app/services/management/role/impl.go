@@ -10,12 +10,12 @@ import (
 )
 
 type impl struct {
-	roleSqlAdapter         roleInterface.AdapterSQL
-	userSqlAdapter         userInterface.AdapterSQL
-	resourceSqlAdapter     resourceInterface.AdapterSQL
-	casbinService          casbinInterface.Service
-	jwtService             jwtInterface.Service
-	activityLogHttpAdapter activityLogInterface.AdapterSql
+	roleSqlAdapter        roleInterface.AdapterSQL
+	userSqlAdapter        userInterface.AdapterSQL
+	resourceSqlAdapter    resourceInterface.AdapterSQL
+	casbinService         casbinInterface.Service
+	jwtService            jwtInterface.Service
+	activityLogSqlAdapter activityLogInterface.AdapterSQL
 }
 
 func New(
@@ -24,14 +24,14 @@ func New(
 	resourceSqlAdapter resourceInterface.AdapterSQL,
 	casbinService casbinInterface.Service,
 	jwtService jwtInterface.Service,
-	activityLogHttpAdapter activityLogInterface.AdapterSql,
+	activityLogSqlAdapter activityLogInterface.AdapterSQL,
 ) roleInterface.Service {
 	return &impl{
-		roleSqlAdapter:         roleSqlAdapter,
-		userSqlAdapter:         userSqlAdapter,
-		resourceSqlAdapter:     resourceSqlAdapter,
-		casbinService:          casbinService,
-		jwtService:             jwtService,
-		activityLogHttpAdapter: activityLogHttpAdapter,
+		roleSqlAdapter:        roleSqlAdapter,
+		userSqlAdapter:        userSqlAdapter,
+		resourceSqlAdapter:    resourceSqlAdapter,
+		casbinService:         casbinService,
+		jwtService:            jwtService,
+		activityLogSqlAdapter: activityLogSqlAdapter,
 	}
 }
