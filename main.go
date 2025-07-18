@@ -16,7 +16,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"go.uber.org/fx"
-	"go.uber.org/fx/fxevent"
 	"go.uber.org/zap"
 )
 
@@ -33,11 +32,6 @@ func main() {
 			initLogger,
 			initFiber,
 		),
-
-		// Disable fx log
-		fx.WithLogger(func() fxevent.Logger {
-			return &fxevent.NopLogger
-		}),
 
 		rest.Module,
 		adapters.Module,
@@ -108,10 +102,11 @@ func initLogger() *zap.Logger {
 	cfg := zap.NewDevelopmentConfig()
 	cfg.Encoding = "json"
 
-	if config.Application.Env == config.Local {
+	switch config.Application.Env {
+	case config.Local:
 		cfg.Encoding = "console"
 		cfg.EncoderConfig.ConsoleSeparator = ` | `
-	} else if config.Application.Env == config.Prod {
+	case config.Prod:
 		cfg = zap.NewProductionConfig()
 	}
 

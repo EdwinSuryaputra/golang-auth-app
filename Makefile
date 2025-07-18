@@ -25,3 +25,8 @@ generate-model:
 .PHONY: run-data-seed
 run-data-seed:
 	@go run ./cmd/seed/. -tags=integration
+
+.PHONY: deploy-docker
+deploy-docker:
+	docker compose up --build -d
+

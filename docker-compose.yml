@@ -4,6 +4,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ./config.yml:/app/config.yml
+    environment:
+      - CONFIG_PATH=/app/config.yml
     ports:
       - '3000:3000'
     depends_on:

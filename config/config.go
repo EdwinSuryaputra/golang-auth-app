@@ -1,6 +1,8 @@
 package config
 
 import (
+	"os"
+
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
 )
@@ -23,9 +25,8 @@ func Init() {
 }
 
 func loadConfig(cfg *config) error {
-	viper.SetConfigName("config") // Filename without extension
-	viper.SetConfigType("yml")    // Explicitly set config type
-	viper.AddConfigPath(".") // Look in the specified path
+	configPath := getConfigPath()
+	viper.SetConfigFile(configPath)
 	viper.AutomaticEnv() // Override with ENV vars if available
 
 	if err := viper.ReadInConfig(); err != nil {
@@ -37,6 +38,14 @@ func loadConfig(cfg *config) error {
 	syncConfig(cfg)
 
 	return nil
+}
+
+func getConfigPath() string {
+	path := os.Getenv("CONFIG_PATH")
+	if path == "" {
+		path = "config.yml" // fallback
+	}
+	return path
 }
 
 func syncConfig(cfg *config) {
